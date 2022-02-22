@@ -1,6 +1,7 @@
 import acm.graphics.GLabel;
 import acm.graphics.GLine;
 import acm.graphics.GOval;
+import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
 import svu.csc213.Dialog;
@@ -14,21 +15,36 @@ public class Hangman extends GraphicsProgram{
 
     String usedWord = word.getWord();
 
-    GLabel wordLabel;
+    Letter letter = new Letter(usedWord, 0);
 
-    
+
+
+    GRect dash;
+
+    GLabel wordLabel;
 
 
     @Override
     public void run() {
+        genWord();
     }
 
     @Override
     public void init() {
         wordLabel = new GLabel(usedWord);
+        dash = new GRect(10, 1);
+
+        wordLabel.setFont("Calibri-50");
+
+        add(letter, 500, 500);
         add(man, 100, 100);
 
-        add(wordLabel, 200, 200);
+
+    }
+
+
+    private void genWord(){
+        add(wordLabel, getWidth()/2 - wordLabel.getWidth(), getHeight()/2- wordLabel.getHeight());
     }
 
     public static void main(String[] args) {
