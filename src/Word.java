@@ -29,6 +29,7 @@ public class Word {
         while (sc.hasNextLine()) {
             for (int i = 0; i < ran.nextInt(1000); i++) {
                 word = sc.nextLine();
+                word.toLowerCase();
             }
             break;
         }

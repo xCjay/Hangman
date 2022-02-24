@@ -23,7 +23,11 @@ public class Hangman extends GraphicsProgram{
 
     Letter[] letArray = new Letter[usedWord.length()];
 
+    GRect[] dashArray = new GRect[usedWord.length()];
+
     public JButton guessLetterBtn;
+
+    int charShown = usedWord.length();
 
 
     GRect dash;
@@ -33,17 +37,15 @@ public class Hangman extends GraphicsProgram{
 
     @Override
     public void run() {
-        genWord();
-        genLett();
+        usedWord = word.getWord();
+        genDashes();
+        genLet();
         addActionListeners();
     }
 
     @Override
     public void init() {
-        wordLabel = new GLabel(usedWord);
         dash = new GRect(10, 1);
-
-        wordLabel.setFont("Calibri-50");
 
         add(letter, 500, 500);
         add(man, 100, 100);
@@ -62,6 +64,7 @@ public class Hangman extends GraphicsProgram{
         }
     }
 
+
     private void guessLetter() {
         String guess = Dialog.getString("Guess A Letter");
 
@@ -69,33 +72,55 @@ public class Hangman extends GraphicsProgram{
     }
 
 
+    private void genDashes(){
+        for (int i = 0; i < usedWord.length(); i++) {
+            dashArray[i] = new GRect(20, 1);
+            add(dashArray[i], getWidth()/2 + 25*(i), getHeight()/8*7);
+        }
+    }
 
-
-    private void genLett(){
+    private void genLet(){
         for (int i = 0; i < usedWord.length(); i++) {
 
             letArray[i] = new Letter(usedWord, i);
 
-            add(letArray[i], getWidth()/2+ 20*(i+2), getHeight()/2);
+            add(letArray[i], dashArray[i].getX(), dashArray[i].getY()-5);
         }
     }
 
     private void guessLet(char a){
+        int check = charShown;
         for (int i = 0; i < usedWord.length(); i++) {
             if (letArray[i].getLetter() == a){
                 letArray[i].setVis(true);
+                charShown += 1;
+                if(charShown == usedWord.length()){
+                    win();
+                }
+            }
+        }
+        if(check == charShown){
+            life -= 1;
+            man.addParts();
+            if(life == 0){
+                lose();
             }
         }
     }
 
-    private void loseLife(){
 
+    private void win(){
+        Dialog.showMessage("You win");
+        run();
+    }
+
+    private void lose(){
+        Dialog.showMessage("You lost");
+        System.exit(0);
     }
 
 
-    private void genWord(){
-        add(wordLabel, getWidth()/2 - wordLabel.getWidth(), getHeight()/2- wordLabel.getHeight());
-    }
+
 
     public static void main(String[] args) {
         new Hangman().start();
