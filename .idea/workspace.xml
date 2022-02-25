@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b7edd7d3-3347-4926-b953-9ba3ab310307" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/res/gallows.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Hangman/Hangman.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hangman/Hangman.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/words.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/words.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hangman/Noose.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hangman/Noose.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hangman/Word.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hangman/Word.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hangman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hangman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noose.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Word.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,15 +45,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Dialog.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/res" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jacks\Documents\GitHub\Hangman\res" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jacks\Documents\GitHub\Hangman\res" />
       <recent name="C:\Users\cd14674\Documents\Programming\Hangman\Res" />
     </key>
   </component>

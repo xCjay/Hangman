@@ -1,2 +1,8 @@
-public class Noose {
+import acm.graphics.GCompound;
+
+public class Noose extends GCompound {
+
+    public Noose(){
+
+    }
 }

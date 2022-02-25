@@ -1,7 +1,4 @@
-import acm.graphics.GLabel;
-import acm.graphics.GLine;
-import acm.graphics.GOval;
-import acm.graphics.GRect;
+import acm.graphics.*;
 import acm.program.GraphicsProgram;
 import java.awt.event.ActionEvent;
 
@@ -20,24 +17,32 @@ public class Hangman extends GraphicsProgram{
     String usedWord = word.getWord();
 
     Letter letter = new Letter(usedWord, 0);
-
     Letter[] letArray = new Letter[usedWord.length()];
 
     GRect[] dashArray = new GRect[usedWord.length()];
+    GRect letterBank = new GRect(300, 50);
 
     public JButton guessLetterBtn;
+    public JButton guessWordBtn;
+    public JButton quit;
+    private GImage gallows;
 
     int charShown = usedWord.length();
+
+    int lettersGuessed = 0;
+    int lettersRight = 0;
 
 
     GRect dash;
 
     GLabel wordLabel;
+    GLabel[] labelBank;
+
 
 
     @Override
     public void run() {
-        usedWord = word.getWord();
+        System.out.println(usedWord);
         genDashes();
         genLet();
         addActionListeners();
@@ -46,11 +51,20 @@ public class Hangman extends GraphicsProgram{
     @Override
     public void init() {
         dash = new GRect(10, 1);
+        gallows = new GImage("res/gallows.png");
+        gallows.setSize(200, 200);
+        setBackground(Color.gray);
 
         add(letter, 500, 500);
-        add(man, 100, 100);
+        add(gallows, 100, 100);
+        add(man, gallows.getX() + 76, gallows.getY()+ 53);
+        add(letterBank, 10, 10);
         guessLetterBtn = new JButton("GuessLetter");
         add(guessLetterBtn, SOUTH);
+        guessWordBtn = new JButton("GuessWord");
+        add(guessWordBtn, SOUTH);
+        quit = new JButton("Quit");
+        add(quit, SOUTH);
 
 
     }
@@ -61,14 +75,27 @@ public class Hangman extends GraphicsProgram{
             case "GuessLetter":
                 guessLetter();
                 break;
+            case "GuessWord":
+                guessWord();
+                break;
+            case "Quit":
+                System.exit(0);
+                break;
+
         }
     }
 
 
     private void guessLetter() {
         String guess = Dialog.getString("Guess A Letter");
-
         guessLet(guess.charAt(0));
+    }
+
+    private void guessWord(){
+        String guess = Dialog.getString("Guess the word");
+        if (guess.equals(usedWord)){
+            win();
+        }
     }
 
 
@@ -94,7 +121,8 @@ public class Hangman extends GraphicsProgram{
             if (letArray[i].getLetter() == a){
                 letArray[i].setVis(true);
                 charShown += 1;
-                if(charShown == usedWord.length()){
+                lettersRight += 1;
+                if(lettersRight == usedWord.length()){
                     win();
                 }
             }
@@ -102,16 +130,27 @@ public class Hangman extends GraphicsProgram{
         if(check == charShown){
             life -= 1;
             man.addParts();
+            addToBank(a);
             if(life == 0){
                 lose();
             }
         }
     }
 
+    private void addToBank(char a){
+        lettersGuessed += 1;
+        add(new GLabel(String.valueOf(a)), letterBank.getX() + lettersGuessed * 25, letterBank.getY() + 10);
+    }
+
 
     private void win(){
+
+        for (int i = 0; i < usedWord.length(); i++) {
+            letArray[i].setVis(true);
+        }
         Dialog.showMessage("You win");
         run();
+
     }
 
     private void lose(){
